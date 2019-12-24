@@ -1,0 +1,27 @@
+image: lambci/lambda:build-nodejs6.10
+pipelines:
+   default:
+     - step:
+         name: Build and package
+         script:
+           - apt-get update && apt-get install -y zip
+           - npm install
+           - npm install node-lambda -g
+           - zip -r code.zip ./node_modules handler.js package.json
+         artifacts:
+           - code.zip
+     - step:
+         name: Update Lambda code
+         script:
+           - pipe: atlassian/aws-lambda-deploy:0.4.3
+             variables:
+               AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+               AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_KEY_ID}
+               AWS_DEFAULT_REGION: 'us-east-2'
+               FUNCTION_NAME: 'my-lambda-function-bitbucket'
+               COMMAND: 'deploy'
+               ZIP_FILE: 'code.zip'
+         caches:
+         - node       
+
+            

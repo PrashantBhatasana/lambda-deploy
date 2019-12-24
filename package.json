@@ -1,0 +1,19 @@
+{
+  "name": "event-slack",
+  "version": "1.0.0",
+  "description": "automating-aws-lambda-deployments.",
+  "main": "handler.js",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "moment": "^2.24.0",
+    "request": "^2.88.0",
+    "util": "^0.12.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Prashant Bhatasana",
+  "license": "ISC"
+}
